@@ -1,0 +1,42 @@
+#main {
+	width:900px;
+	margin:auto;
+}
+
+#browser, #playlist {
+	width: 300px;
+	height: 500px;
+	overflow:auto;
+	border:1px solid gray;
+	padding:4px;
+	float:left;
+	text-align:left;
+}
+#browser {
+	width:580px;
+}
+
+#info {
+	width:20px;
+	height:100px;
+}
+
+#playlist ul {
+	list-style:none;
+}
+#playlist ul li {
+	cursor:pointer;
+	background:#222;
+	border:1px solid gray;
+	height:30px;
+}
+#playlist ul li:hover {
+	border:1px solid red;
+}
+#playlist ul li.current {
+	background:#042;
+}
+
+#player {
+	margin:4px 5px 0px 0px;
+}
