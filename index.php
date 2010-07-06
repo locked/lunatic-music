@@ -95,10 +95,9 @@ $preload = "none";
 ?>
 <div id="main"> 
 <div id="header"> 
-	<a href="/"><img src="/media/img/logo.png"/></a> 
+	<a href="/"><img src="/media/img/logo-trans.png"/></a> 
 	<audio id="player" class="right" src="" controls preload="<?= $preload ?>" autoplay autobuffer="autobuffer">
 </div>
-<br>
 
 <div id="break"></div>
 <div id="fileinfo"> 
@@ -110,9 +109,10 @@ $preload = "none";
 </div>
 
 <div id="playlist"> 
-<a href="javascript:next();"> NEXT </a>
-<a href="javascript:clear();"> CLEAR </a>
-<ul></ul>
+<a href="javascript:clear();">CLEAR</a>
+ - 
+<a href="javascript:next();">NEXT</a>
+<ul id="sortable"></ul>
 </div>
 
 
@@ -160,13 +160,18 @@ function clear() {
 }
 function enqueue( file ) {
 	var filename = file.replace( "/music/", "" );
-	var e = $("<li></li>").html( filename ).attr("lang",file).click( function () { playThis( this ); } );
+	var e = $("<li></li>").attr("lang",file); //.click( function () { playThis( this ); } );
+	e.html( "<div class='handle'>&nbsp;&nbsp;</div>" );
+	var fn = $("<div></div>").click( function () { playThis( $(this).parent().get(0) ); } );
+	fn.html( filename );
+	e.append( fn );
 	$("#playlist").children("ul").append( e );
 }
 function enqueueDir( d ) {
 	$.getJSON( "?list&d="+d, function (json) {
 		for( i in json ) {
-			enqueue( json[i] );
+			if( json[i] )
+				enqueue( json[i] );
 		}
 	});
 }
@@ -220,6 +225,11 @@ function getList( d ) {
 // Entry point
 $(document).ready( function() {
 	getList( "<? $dir ?>" );
+	$("#sortable").sortable({
+		placeholder: 'ui-state-highlight',
+		handle: '.handle',
+	});
+	$("#sortable").disableSelection();
 });
 </script>
 </body> 
