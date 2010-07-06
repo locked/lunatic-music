@@ -99,6 +99,11 @@ $preload = "none";
 	<audio id="player" class="right" src="" controls preload="<?= $preload ?>" autoplay autobuffer="autobuffer">
 </div>
 <br>
+
+<div id="break"></div>
+<div id="fileinfo"> 
+</div>
+
 <div id="break"></div>
 
 <div id="browser"> 
@@ -144,6 +149,12 @@ function setFile( file ) {
 	a.addEventListener( 'stalled', function() {alert("stalled");}, false );
 	*/
 }
+function fileinfo( txt ) {
+	$("#fileinfo").html( txt );
+}
+function fileinfo_add( txt ) {
+	$("#fileinfo").append( txt );
+}
 function clear() {
 	$("#playlist").children("ul").html("");
 }
@@ -176,23 +187,29 @@ function next() {
 	for( i in es ) {
 		if( n ) {
 			//alert( "SET:"+es[i].lang );
-			setFile( es[i].lang );
+			//fileinfo_add( "SET:"+es[i].lang );
+			playThis( es[i] );
 			break;
 		}
 		if( es[i].lang==a.lang ) {
 			//alert( "DETECT:"+es[i].lang+" src:"+a.lang );
+			//fileinfo_add( "DETECT:"+es[i].lang+" src:"+a.lang );
 			n = true;
 		}
 	}
+	if( !n && es.length>0 ) {
+		playThis( es[0] );
+	}
 }
 
-//window.setInterval( updateStatus, 1500 );
+window.setInterval( updateStatus, 1000 );
 function updateStatus() {
 	if( (Math.floor( a.currentTime )+2)>a.duration ) {
-		//alert( "end" );
 		next();
 	}
-	$("#info").html( a.readyState+" / "+a.duration+":"+a.currentTime );
+	var c = Math.floor( a.currentTime );
+	var d = Math.floor( a.duration );
+	fileinfo( "Elapsed time: "+c+"/"+d );
 }
 function getList( d ) {
 	$.get( "index.php?get&d="+d, function( txt ) {
