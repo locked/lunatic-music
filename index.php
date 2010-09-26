@@ -1,12 +1,13 @@
 <?
+$HOST = "http://www.lunasys.fr";
+
 $root = "/hd1/hosting";
 
 if( isset( $_GET["d"] ) && trim($_GET["d"])!="" )
 	$dir = urldecode( $_GET["d"] )."/";
 else
 	$dir = "/music/";
-	//$dir = "/music/variete/1991/";
-	//$dir = "/music/nihon/LilB/";
+//$dir = "/music/";
 
 $file_formats = array( "ogg" );
 
@@ -82,12 +83,12 @@ if( $files ) {
 <head> 
 	<meta charset="utf-8"/> 
 	<title>Lunatic Systems Music Player</title> 
-	<link rel="SHORTCUT ICON" href="/media/r5.ico" /> 
-	<script type="text/javascript" src="/media/js/jquery-1.3.2.min.js"></script> 
-	<script type="text/javascript" src="/media/js/jquery-ui-1.7.2.custom.min.js"></script> 
-	<link rel="stylesheet" href="/media/css/cms.css" /> 
+	<link rel="SHORTCUT ICON" href="<?= $HOST ?>/media/r4.ico" /> 
+	<script type="text/javascript" src="<?= $HOST ?>/media/js/jquery-1.3.2.min.js"></script> 
+	<script type="text/javascript" src="<?= $HOST ?>/media/js/jquery-ui-1.7.2.custom.min.js"></script> 
+	<link rel="stylesheet" href="<?= $HOST ?>/media/css/cms.css" /> 
 	<link rel="stylesheet" href="music.css" /> 
-	<link rel="stylesheet" href="/media/css/ui-darkness/jquery-ui-1.7.2.custom.css" /> 
+	<link rel="stylesheet" href="<?= $HOST ?>/media/css/ui-darkness/jquery-ui-1.7.2.custom.css" /> 
 </head> 
 <body> 
 <?
@@ -95,7 +96,7 @@ $preload = "none";
 ?>
 <div id="main"> 
 <div id="header"> 
-	<a href="/"><img src="/media/img/logo-trans.png"/></a> 
+	<a href="/"><img src="<?= $HOST ?>/media/img/logo-trans.png"/></a> 
 	<audio id="player" class="right" src="" controls preload="<?= $preload ?>" autoplay autobuffer="autobuffer">
 </div>
 
