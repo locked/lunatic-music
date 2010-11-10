@@ -1,3 +1,6 @@
+body {
+	font-family:Arial;
+}
 #main {
 	width:900px;
 	margin:auto;
@@ -30,10 +33,12 @@
 	list-style:none;
 }
 #playlist ul li {
-	cursor:pointer;
 	background:#222;
 	border:1px solid gray;
 	height:30px;
+}
+#playlist ul li a {
+	text-decoration:none;
 }
 #playlist ul li:hover {
 	border:1px solid red;
